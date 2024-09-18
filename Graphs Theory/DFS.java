@@ -32,21 +32,21 @@ public class DFS {
         }
     }
 
-    public static void dfsStack(ArrayList<Edge> graph[]) {
-        int start = 0;
+    public static void dfsStack(ArrayList<Edge> graph[], int src) {
         boolean[] visisted = new boolean[graph.length];
         Stack<Integer> stack = new Stack<>();
         
-        stack.push(start);
+        stack.push(src);
         
-        while (stack != null) {
+        while (!stack.isEmpty()) {
             int curr = stack.pop();
             if (visisted[curr] != true) {
                 System.out.println(curr + " ");
                 visisted[curr] = true;
                 for (int i = 0; i < graph[curr].size(); i++) {
-                    if (visisted[curr] != true) {
-                        stack.add(graph[curr].get(i).dest);
+                    Edge e = graph[curr].get(i);
+                    if (visisted[e.dest] == false) {
+                        stack.add(e.dest);
                     }
                 }
             }

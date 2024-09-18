@@ -20,10 +20,10 @@ public class BFS {
         }
     }
 
-    public static void bfs(ArrayList<Edge> graph[], int V) {
+    public static void bfs(ArrayList<Edge> graph[], int V, int src) {
         Queue<Integer> q = new LinkedList<>();
         boolean vis[] = new boolean[V];
-        q.add(0);
+        q.add(src);
 
         while (!q.isEmpty()) {
             int curr = q.remove();
@@ -41,7 +41,7 @@ public class BFS {
         boolean vis[] = new boolean[V];
 
         for (int j = 0; j < V; j++) {
-            
+
             if (vis[j] == true) {
                 continue;
             }
