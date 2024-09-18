@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class AllPathsFromSourceToTarget {
     static class Edge {
@@ -22,6 +25,7 @@ public class AllPathsFromSourceToTarget {
 
         if (t == curr) {
             System.out.println(path);
+            return;
         }
         for (int i = 0; i < graph[curr].size(); i++) {
             Edge e = graph[curr].get(i);
@@ -32,7 +36,48 @@ public class AllPathsFromSourceToTarget {
                 visited[curr] = false;
             }
         }
+    }
 
+    static void bfsAllPath(List<Edge> graph[], int src, int targ) {
+        Queue<List<Integer>> q = new LinkedList<>();
+        List<Integer> path = new ArrayList<>();
+
+        path.add(src);
+        q.offer(path);
+
+        while (!q.isEmpty()) {
+            path = q.poll();
+            int last = path.get(path.size() - 1);
+
+            if (last == targ) {
+                printPath(path);
+            }
+
+            for (int i = 0; i < graph[last].size(); i++) {
+                if (isNotVisited(graph[last].get(i).dest, path)) {
+                    List<Integer> newPath = new ArrayList<>(path);
+                    newPath.add(graph[last].get(i).dest);
+                    q.offer(newPath);
+                }
+            }
+        }
+    }
+
+    private static void printPath(List<Integer> path) {
+        for (Integer v : path) {
+            System.out.print(v + " ");
+        }
+        System.out.println();
+    }
+
+    private static boolean isNotVisited(int x, List<Integer> path) {
+        int size = path.size();
+        for (int i = 0; i < size; i++) {
+            if (path.get(i) == x) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void main(String[] args) {
