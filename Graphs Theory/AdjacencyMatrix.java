@@ -1,6 +1,7 @@
 public class AdjacencyMatrix {
 
     private boolean[][] adjacencyMatrix;
+    @SuppressWarnings("unused")
     private int numVertices;
 
     public AdjacencyMatrix(int numVertices){

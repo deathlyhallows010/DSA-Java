@@ -54,9 +54,10 @@ public class AllPathsFromSourceToTarget {
             }
 
             for (int i = 0; i < graph[last].size(); i++) {
-                if (isNotVisited(graph[last].get(i).dest, path)) {
+                Edge e = graph[last].get(i);
+                if (isNotVisited(e.dest, path)) {
                     List<Integer> newPath = new ArrayList<>(path);
-                    newPath.add(graph[last].get(i).dest);
+                    newPath.add(e.dest);
                     q.offer(newPath);
                 }
             }

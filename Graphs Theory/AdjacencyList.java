@@ -41,6 +41,7 @@ public class AdjacencyList {
     public static void main(String args[]) {
         int V = 4; // Number of vertices
 
+        @SuppressWarnings("unchecked")
         ArrayList<Edge> graph[] = new ArrayList[V]; // As we are saying graph[], so this means its creating an array of
                                                     // arraylist. Size Both methods are allowed
         createGraph(graph);
