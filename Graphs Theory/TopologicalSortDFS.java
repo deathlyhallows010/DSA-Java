@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class TopologicalSort{
+public class TopologicalSortDFS{
 
     static class Edge {
             int src;
@@ -30,7 +30,22 @@ public class TopologicalSort{
         }
         stack.push(curr);
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) {    
         // Directed and non Cyclic (DAG)
+        int V = 4;
+        @SuppressWarnings("unchecked")
+        ArrayList<Edge> graph[] = new ArrayList[V];
+
+        Stack<Integer> stack = new Stack<>();
+        boolean[] visited = new boolean[V];
+        for (int i = 0; i < V; i++) {
+            if (!visited[i])
+                DFSTopologicalSort(graph, visited, 0, stack);
+        }
+
+        while (!stack.empty()) {
+            System.out.print(stack.pop() + " ");
+        }
+
     }
 }
