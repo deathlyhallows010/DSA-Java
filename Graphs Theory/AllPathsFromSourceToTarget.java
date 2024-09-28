@@ -29,10 +29,9 @@ public class AllPathsFromSourceToTarget {
         }
         for (int i = 0; i < graph[curr].size(); i++) {
             Edge e = graph[curr].get(i);
-            if (visited[e.dest] != true) {
-                path += graph[curr].get(i).dest;
+            if (!visited[e.dest]) {
                 visited[curr] = true;
-                modifiedDFS(graph, e.dest, visited, path, t);
+                modifiedDFS(graph, e.dest, visited, path + e.dest, t);
                 visited[curr] = false;
             }
         }

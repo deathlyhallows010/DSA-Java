@@ -24,15 +24,19 @@ public class CycleDetectionDriected {
         rec[curr] = true;
         for (int i = 0; i < graph[curr].size(); i++) {
             Edge e = graph[curr].get(i);
-            if (rec[e.dest] == true) {
+            if (rec[e.dest]) {
                 return true;
             } else if (!visited[e.dest]) {
-                DFSDetectCycle(graph, visited, e.dest, rec);
+                if (DFSDetectCycle(graph, visited, e.dest, rec)) {
+                    return true;
+                }
             }
         }
         rec[curr] = false; // remove from call stack
         return false;
     }
+
+    // Kahn Algorithm - BFS Approach for yndirected graph (Topological Sort)    
 
     public static void main(String[] args) {
         int V = 4;

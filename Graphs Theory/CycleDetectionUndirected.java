@@ -1,32 +1,52 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class CycleDetectionUndirected {
 
     static class Edge {
-            int src;
-            int dest;
-            int weight;
-    
-            public Edge(int s, int d) {
-                this.src = s;
-                this.dest = d;
-            }
-    
-            public Edge(int s, int d, int w) {
-                this.src = s;
-                this.dest = d;
-                this.weight = w;
-            }
+        int src;
+        int dest;
+        int weight;
+
+        public Edge(int s, int d) {
+            this.src = s;
+            this.dest = d;
+        }
+
+        public Edge(int s, int d, int w) {
+            this.src = s;
+            this.dest = d;
+            this.weight = w;
+        }
     }
-    public static boolean isCyclicUndirected(ArrayList<Edge> graph[], boolean vis[], int curr, int par){
+
+    public static boolean isCyclicUndirected(ArrayList<Edge> graph[], boolean vis[], int curr, int par) {
         vis[curr] = true;
-        for(int i = 0; i<graph[curr].size();i++){
+        for (int i = 0; i < graph[curr].size(); i++) {
             Edge e = graph[curr].get(i);
-            if(vis[e.dest] == true && e.dest != par){
+            if (vis[e.dest] == true && e.dest != par) {
                 return true;
-            } else if(vis[e.dest] == false){
-                if(isCyclicUndirected(graph, vis, e.dest, curr)){
+            } else if (vis[e.dest] == false) {
+                if (isCyclicUndirected(graph, vis, e.dest, curr)) {
                     return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean BFSIscyclic(ArrayList<Edge> graph[], boolean vis[], int src) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(src);
+        while (!q.isEmpty()) {
+            int curr = q.poll();
+            if (vis[curr]) { // Cycle Detected
+                return true;
+            }
+            vis[curr] = true;
+            for (int i = 0; i < graph[curr].size(); i++) {
+                Edge e = graph[curr].get(i);
+                if (vis[e.dest] == false) {
+                    q.add(e.dest);
                 }
             }
         }
@@ -39,7 +59,7 @@ public class CycleDetectionUndirected {
         @SuppressWarnings("unchecked")
         ArrayList<Edge> graph[] = new ArrayList[V];
         System.out.println(isCyclicUndirected(graph, new boolean[V], 0, -1));
-        
+
     }
-    
+
 }
