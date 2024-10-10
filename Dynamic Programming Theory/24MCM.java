@@ -17,7 +17,7 @@ class Solution {
         return min;
     }
 
-    static int[][] dp = new int[100][100];
+    static int[][] dp = new int[1001][1001];
 
     static int matrixChainMemoised(int[] p, int i, int j) {
         if (i == j) {
